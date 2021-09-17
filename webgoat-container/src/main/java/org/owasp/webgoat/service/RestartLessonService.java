@@ -33,6 +33,7 @@ import org.owasp.webgoat.users.UserTracker;
 import org.owasp.webgoat.users.UserTrackerRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -60,5 +61,12 @@ public class RestartLessonService {
         var flyway = flywayLessons.apply(webSession.getUserName());
         flyway.clean();
         flyway.migrate();
+    }
+
+    @PostMapping("/service/resetLessonDatabase.mvc")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void resetLessonDatabase() {
+        flywayLessons.clean();
+        flywayLessons.migrate();
     }
 }

@@ -50,7 +50,8 @@ define(['jquery',
             'lesson/:name': 'lessonRoute',
             'lesson/:name/:pageNum': 'lessonPageRoute',
             'test/:param': 'testRoute',
-            'reportCard': 'reportCard'
+            'reportCard': 'reportCard',
+            'resetLessonDatabase': 'resetLessonDatabase'
         },
 
         lessonController: null,
@@ -131,6 +132,13 @@ define(['jquery',
                 self.titleView.render('Report card');
                 render(new ReportCardView());
             });
+        },
+
+        resetLessonDatabase: function() {
+             $.ajax({
+                 url:'service/resetLessonDatabase.mvc',
+                 method:'POST'
+             });
         },
     });
 
